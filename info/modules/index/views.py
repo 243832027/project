@@ -9,7 +9,7 @@ from . import index_blu
 def news_list():
     cid=request.args.get("cid","1")
     page = request.args.get("page", "1")
-    per_page = request.args.get("per_page", "1")
+    per_page = request.args.get("per_page", "10")
 
     try:
         page=int(page)
