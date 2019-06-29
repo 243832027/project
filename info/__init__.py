@@ -3,7 +3,7 @@ from logging.handlers import RotatingFileHandler
 
 from flask_wtf.csrf import generate_csrf
 from redis import StrictRedis
-from flask import Flask
+from flask import Flask, render_template, g
 from flask_session import Session
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import CSRFProtect
@@ -43,6 +43,14 @@ def create_app(config_name):
     from info.utils.common import do_index_class
     app.add_template_filter(do_index_class, "index_class")
 
+    from info.utils.common import user_login_data
+    @app.errorhandler(404)
+    @user_login_data
+    def page_not_fount(e):
+        user=g.user
+        data={"user_info":user.to_dict() if user else None}
+        return render_template("news/404.html",data=data)
+
     @app.after_request
     def after_requset(response):
         csrf_token=generate_csrf()
@@ -60,5 +68,8 @@ def create_app(config_name):
 
     from info.modules.profile import profile_blu
     app.register_blueprint(profile_blu)
+
+    from info.modules.admin import admin_blu
+    app.register_blueprint(admin_blu,url_prefix="/admin")
 
     return app

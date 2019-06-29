@@ -29,8 +29,8 @@
 
             {% if data.user %}
                 <div class="user_login fr">
-                <img src="{% if data.user.avatar_url %}{{ data.user_info.avatar_url }}{% else %}../../static/news/images/person01.png{% endif %}" class="lgin_pic">
-                <a href="#">{{ data.user.nick_name }}</a>
+                <img src="{% if data.user.avatar_url %}{{ data.user.avatar_url }}{% else %}../../static/news/images/person01.png{% endif %}" class="lgin_pic">
+                <a href="#" id="nick_name">{{ data.user.nick_name }}</a>
                 <a href="javascript:;" onclick="logout()">退出</a>
             </div>
             {% else %}
@@ -62,25 +62,27 @@
                 </ul>
             </div>
         {% endblock %}
-    
-
-
     </div>
+    
+    {% block bottomBlock %}
     <div class="footer">
-        <div class="footer_links">
-            <a href="">关于我们</a>
-            <span>|</span>
-            <a href="">联系我们</a>
-            <span>|</span>
-            <a href="">招聘人才</a>
-            <span>|</span>
-            <a href="">友情链接</a>
-        </div>
-        <p class="copyright">
-            CopyRight © 2018 新经资讯信息技术有限公司 All Rights Reserved<br />
-电话：010-****888    京ICP备*******8号
+            <div class="footer_links">
+                <a href="">关于我们</a>
+                <span>|</span>
+                <a href="">联系我们</a>
+                <span>|</span>
+                <a href="">招聘人才</a>
+                <span>|</span>
+                <a href="">友情链接</a>
+            </div>
+            <p class="copyright">
+                CopyRight © 2018 新经资讯信息技术有限公司 All Rights Reserved<br />
+            电话：010-****888    京ICP备*******8号
         </p>
     </div>
+    {% endblock %}
+
+
 
     <!-- 登录表单 -->
     <form class="login_form_con">
